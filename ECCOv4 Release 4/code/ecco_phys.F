@@ -331,7 +331,11 @@ c---------
           if (gencost_barfile(kgen)(1:13).EQ.'m_boxmean_eta') then
             tmpfld=m_eta(i,j,bi,bj)
             if (tmpmsk.NE.0. _d 0) tmpmsk2=1. _d 0
+          elseif (gencost_barfile(kgen)(1:12).EQ.'m_boxmean_bp') then
+            tmpfld=m_bp(i,j,bi,bj)
+            if (tmpmsk.NE.0. _d 0) tmpmsk2=1. _d 0	
           endif
+
 c
           gencost_storefld(i,j,bi,bj,kgen) =
      &        gencost_storefld(i,j,bi,bj,kgen)
