@@ -1099,6 +1099,7 @@ C     do_fields_blocking_exchages
 CADJ STORE theta, salt = comlev1, key = ikey_dynamics, kind = isbyte
 CADJ STORE uvel,  vvel = comlev1, key = ikey_dynamics, kind = isbyte
 CADJ STORE totPhiHyd   = comlev1, key = ikey_dynamics, kind = isbyte
+CADJ STORE phiHydLow   = comlev1, key = ikey_dynamics, kind = isbyte
 # ifdef ALLOW_PTRACERS
 CADJ STORE pTracer     = comlev1, key = ikey_dynamics, kind = isbyte
 # endif
