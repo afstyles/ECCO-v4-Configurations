@@ -340,11 +340,19 @@ c---------
           endif
 
 c
-          gencost_storefld(i,j,bi,bj,kgen) =
-     &        gencost_storefld(i,j,bi,bj,kgen)
-     &        +tmpmsk*tmpfld*rA(i,j,bi,bj)
-          areavolTile(bi,bj)=areavolTile(bi,bj)
-     &        +tmpmsk2*rA(i,j,bi,bj)
+          if (gencost_barfile(kgen)(1:12).EQ.'m_boxmean_bp') then
+             gencost_storefld(i,j,bi,bj,kgen) =
+     &           gencost_storefld(i,j,bi,bj,kgen)
+     &           +tmpmsk*tmpfld
+             areavolTile(bi,bj)=areavolTile(bi,bj)
+     &           +tmpmsk
+          else
+             gencost_storefld(i,j,bi,bj,kgen) =
+     &           gencost_storefld(i,j,bi,bj,kgen)
+     &           +tmpmsk*tmpfld*rA(i,j,bi,bj)
+             areavolTile(bi,bj)=areavolTile(bi,bj)
+     &           +tmpmsk2*rA(i,j,bi,bj)
+          endif
 c---------
           do k = 1,nr
 c
