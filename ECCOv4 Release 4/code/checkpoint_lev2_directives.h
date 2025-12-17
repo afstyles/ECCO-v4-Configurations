@@ -1,7 +1,7 @@
 C $Header: /u/gcmpack/MITgcm/pkg/autodiff/checkpoint_lev2_directives.h,v 1.61 2016/09/12 19:59:10 mmazloff Exp $
 C $Name:  $
 c
-c     store directives for checkpoint level 2
+c     store directives for checkpoint level 4
 c
 c     created: heimbach@mit.edu 10-Jan-2002
 c
@@ -9,7 +9,6 @@ c
 c
 CADJ STORE etan  = tapelev2, key = ilev_2
 CADJ STORE surfaceforcingTice = tapelev2, key = ilev_2
-#ifndef EXCLUDE_FFIELDS_LOAD
 CADJ STORE taux0 = tapelev2, key = ilev_2
 CADJ STORE taux1 = tapelev2, key = ilev_2
 CADJ STORE tauy0 = tapelev2, key = ilev_2
@@ -24,15 +23,14 @@ CADJ STORE sss0 = tapelev2, key = ilev_2
 CADJ STORE sss1 = tapelev2, key = ilev_2
 CADJ STORE saltflux0 = tapelev2, key = ilev_2
 CADJ STORE saltflux1 = tapelev2, key = ilev_2
-# ifdef SHORTWAVE_HEATING
+#ifdef SHORTWAVE_HEATING
 CADJ STORE qsw0 = tapelev2, key = ilev_2
 CADJ STORE qsw1 = tapelev2, key = ilev_2
-# endif
-# ifdef ATMOSPHERIC_LOADING
+#endif
+#ifdef ATMOSPHERIC_LOADING
 CADJ STORE pload0 = tapelev2, key = ilev_2
 CADJ STORE pload1 = tapelev2, key = ilev_2
-# endif
-#endif /* ndef EXCLUDE_FFIELDS_LOAD */
+#endif
 #ifdef EXACT_CONSERV
 CADJ STORE etaH = tapelev2, key = ilev_2
 CADJ STORE dEtaHdt = tapelev2, key = ilev_2
@@ -97,13 +95,14 @@ CADJ STORE rstardhcdt,rstardhsdt,rstardhwdt
 CADJ &     = tapelev2, key = ilev_2
 # endif
 
-#endif /* NONLIN_FRSURF */
+# ifdef ALLOW_CG2D_NSA
+CADJ STORE aW2d, aS2d, aC2d =
+CADJ &     tapelev2, key = ilev_2
+CADJ STORE pc, ps, pw =
+CADJ &     tapelev2, key = ilev_2
+# endif
 
-#if (defined ALLOW_CG2D_NSA || defined NONLIN_FRSURF || \
-      defined ALLOW_DEPTH_CONTROL)
-CADJ STORE aW2d, aS2d, aC2d = tapelev2, key = ilev_2
-CADJ STORE pc, ps, pw       = tapelev2, key = ilev_2
-#endif
+#endif /* NONLIN_FRSURF */
 
 #ifdef ALLOW_CD_CODE
 # include "cd_code_ad_check_lev2_dir.h"
@@ -160,6 +159,10 @@ CADJ STORE pc, ps, pw       = tapelev2, key = ilev_2
 #ifdef ALLOW_OFFLINE
 # include "offline_ad_check_lev2_dir.h"
 #endif /* ALLOW_OFFLINE */
+
+#ifdef ALLOW_GCHEM
+# include "gchem_ad_check_lev2_dir.h"
+#endif
 
 #ifdef ALLOW_CFC
 # include "cfc_ad_check_lev2_dir.h"
