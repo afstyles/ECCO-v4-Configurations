@@ -44,6 +44,9 @@ C This allows for initila UVEL and VVEL controls
 #define ALLOW_UVEL0_CONTROL
 #define ALLOW_VVEL0_CONTROL
 
+C This allows for BOTTOMDRAG controls
+#define ALLOW_BOTTOMDRAG_CONTROL
+
 C This allosws updating etaH as well.
 #define ALLOW_ETAH_UPDATE
 
