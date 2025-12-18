@@ -34,3 +34,8 @@ CEOP
      &                       bottomDragFld
       _RL  bottomDragFld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
 #endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      COMMON /CTRL_FIELDS_NLBOTTOMDRAG/
+     &                       nlbottomDragFld
+      _RL  nlbottomDragFld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+#endif

@@ -199,6 +199,11 @@ c    &     .TRUE.,.TRUE.,.TRUE.,1,myThid)
            gencost_modfld(i,j,bi,bj,k) =
      &      bottomDragFld(i,j,bi,bj)*maskC(i,j,1,bi,bj)
 #endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+         elseif (gencost_barfile(k)(1:14).EQ.'m_nlbottomdrag') then
+           gencost_modfld(i,j,bi,bj,k) =
+     &      nlbottomDragFld(i,j,bi,bj)*maskC(i,j,1,bi,bj)
+#endif
 #endif
 #ifdef ALLOW_SEAICE
          elseif ( (gencost_name(k).EQ.'siv4-conc').OR.

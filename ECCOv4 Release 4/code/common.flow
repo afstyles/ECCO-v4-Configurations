@@ -94,6 +94,9 @@ c$taf COMMON ctrl_fields_kapredi FTLNAME = g_ctrl_fields_kapredi
 c$taf COMMON ctrl_fields_bottomdrag  ADNAME = adctrl_fields_bottomdrag
 c$taf COMMON ctrl_fields_bottomdrag FTLNAME = g_ctrl_fields_bottomdrag
 
+c$taf COMMON ctrl_fields_nlbottomdrag  ADNAME = adctrl_fields_nlbottomdrag
+c$taf COMMON ctrl_fields_nlbottomdrag FTLNAME = g_ctrl_fields_nlbottomdrag
+
 c$taf COMMON grid_r  ADNAME = adgrid_r
 c$taf COMMON grid_r FTLNAME = g_grid_r
 

@@ -353,7 +353,8 @@ c     objf_diffkr - diffusion contribution
 c     objf_theta_ini_fin - final vs. initial theta misfit
 c     objf_salt_ini_fin  - final vs. initial salt misfit
 c     objf_eddytau - eddy streamfunction contribution
-c     objf_bottomdrag - bottom drag contribution
+c     objf_bottomdrag - linear bottom drag contribution
+c     objf_nlbottomdrag - nonlinear bottom drag contribution
 c
 c     mult_"var" - multipliers for the individual cost
 c                  function contributions.
@@ -401,6 +402,7 @@ c                  function contributions.
      &     objf_theta_ini_fin, objf_salt_ini_fin,
      &     objf_eddytau,
      &     objf_bottomdrag,
+     &     objf_nlbottomdrag
      &     objf_transp
 
       _RL  objf_hflux  (nsx,nsy)
@@ -503,6 +505,7 @@ c                  function contributions.
       _RL  objf_salt_ini_fin(nsx,nsy)
       _RL  objf_eddytau(nsx,nsy)
       _RL  objf_bottomdrag(nsx,nsy)
+      _RL  objf_nlbottomdrag(nsx,nsy)
       _RL  objf_transp
 
       common /ecco_cost_num/
@@ -587,6 +590,7 @@ c                  function contributions.
      &                num_salt_ini_fin,
      &                num_eddytau,
      &                num_bottomdrag,
+     &                num_nlbottomdrag,
      &                num_transp
 
       _RL  num_hflux  (nsx,nsy)
@@ -670,6 +674,7 @@ c                  function contributions.
       _RL  num_salt_ini_fin(nsx,nsy)
       _RL  num_eddytau(nsx,nsy)
       _RL  num_bottomdrag(nsx,nsy)
+      _RL  num_nlbottomdrag(nsx,nsy)
       _RL  num_transp
 
       common /ecco_cost_aux_r/
@@ -734,6 +739,7 @@ c                  function contributions.
      &                    mult_ini_fin,
      &                    mult_edtau,
      &                    mult_bottomdrag,
+     &                    mult_nlbottomdrag,
      &                    mult_smooth_ic,
      &                    mult_smooth_bc,
      &                    mult_transp
@@ -798,6 +804,7 @@ c                  function contributions.
       _RL  mult_ini_fin
       _RL  mult_edtau
       _RL  mult_bottomdrag
+      _RL  mult_nlbottomdrag
       _RL  mult_smooth_ic
       _RL  mult_smooth_bc
       _RL  mult_transp
@@ -882,6 +889,7 @@ c     velerrfile            - representation error
      &                kapredi_errfile,
      &                diffkr_errfile,
      &                bottomdrag_errfile,
+     &                nlbottomdrag_errfile,
      &                usercost_errfile,
      &                uwind_errfile,
      &                vwind_errfile
@@ -941,6 +949,7 @@ c     velerrfile            - representation error
       character*(MAX_LEN_FNAM) kapredi_errfile
       character*(MAX_LEN_FNAM) diffkr_errfile
       character*(MAX_LEN_FNAM) bottomdrag_errfile
+      character*(MAX_LEN_FNAM) nlbottomdrag_errfile
       character*(MAX_LEN_FNAM) usercost_errfile(NUSERCOST)
       character*(MAX_LEN_FNAM) uwind_errfile
       character*(MAX_LEN_FNAM) vwind_errfile
@@ -979,6 +988,7 @@ c     wetan      - weight for etan0
      &                      wswflux,wswdown,wlwflux,wlwdown,
      &                      wevap,wapressure,wrunoff,
      &                      wbottomdrag,
+     &                      wnlbottomdrag,
      &                      wuwind,wvwind,
      &                      wscatx,wscaty,
 #ifdef ALLOW_SIGMAR_COST_CONTRIBUTION
@@ -1025,6 +1035,7 @@ c     wetan      - weight for etan0
       _RL wapressure(1-olx:snx+olx,1-oly:sny+oly,   nsx,nsy)
       _RL wrunoff (1-olx:snx+olx,1-oly:sny+oly,   nsx,nsy)
       _RL wbottomdrag (1-olx:snx+olx,1-oly:sny+oly,nsx,nsy)
+      _RL wnlbottomdrag (1-olx:snx+olx,1-oly:sny+oly,nsx,nsy)
       _RL wuwind  (1-olx:snx+olx,1-oly:sny+oly,   nsx,nsy)
       _RL wvwind  (1-olx:snx+olx,1-oly:sny+oly,   nsx,nsy)
       _RL wtheta  (                            nr,nsx,nsy)
@@ -1092,7 +1103,8 @@ c
      &        watemp0, waqh0, wprecip0, wsnowprecip0, wwind0,
      &        wswflux0, wswdown0, wlwflux0, wlwdown0,
      &        wevap0, wapressure0, wrunoff0, wkapredi0,
-     &        wbottomdrag0,wdiffkr0, wkapgm0, wedtau0
+     &        wbottomdrag0,wdiffkr0, wkapgm0, wedtau0,
+     &        wnlbottomdrag0,
       _RL whflux0
       _RL wsflux0
       _RL wtau0
@@ -1108,6 +1120,7 @@ c
       _RL wapressure0
       _RL wrunoff0
       _RL wbottomdrag0
+      _RL wnlbottomdrag0
       _RL wwind0
       _RL wdiffkr0
       _RL wkapgm0

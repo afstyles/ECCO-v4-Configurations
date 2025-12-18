@@ -128,7 +128,7 @@ c--   Read the namelist input.
      &  xx_sssstartdate1, xx_sssstartdate2, xx_sssperiod,
      &  xx_depth_file, xx_gen2d_file, xx_gen3d_file,
      &  xx_efluxy_file, xx_efluxp_file, xx_bottomdrag_file,
-     &  xx_edtaux_file, xx_edtauy_file,
+     &  xx_nlbottomdrag_file, xx_edtaux_file, xx_edtauy_file,
      &  xx_uvel_file, xx_vvel_file, xx_etan_file,
      &  xx_siarea_file, xx_siheff_file, xx_sihsnow_file,
      &  xx_shifwflx_file,
@@ -458,24 +458,25 @@ c
         xx_shifwflx_remo_intercept=0. _d 0
         xx_shifwflx_remo_slope =   0. _d 0
 c
-        xx_diffkr_file      = 'xx_diffkr'
-        xx_kapgm_file       = 'xx_kapgm'
-        xx_kapredi_file     = 'xx_kapredi'
-        xx_tr1_file         = 'xx_ptr'
-        xx_depth_file       = 'xx_depth'
-        xx_efluxy_file      = 'xx_efluxy'
-        xx_efluxp_file      = 'xx_efluxp'
-        xx_bottomdrag_file  = 'xx_bottomdrag'
-        xx_edtaux_file      = 'xx_edtaux'
-        xx_edtauy_file      = 'xx_edtauy'
-        xx_uvel_file        = 'xx_uvel'
-        xx_vvel_file        = 'xx_vvel'
-        xx_etan_file        = 'xx_etan'
-        xx_siarea_file      = 'xx_siarea'
-        xx_siheff_file      = 'xx_siheff'
-        xx_sihsnow_file     = 'xx_sihsnow'
+        xx_diffkr_file       = 'xx_diffkr'
+        xx_kapgm_file        = 'xx_kapgm'
+        xx_kapredi_file      = 'xx_kapredi'
+        xx_tr1_file          = 'xx_ptr'
+        xx_depth_file        = 'xx_depth'
+        xx_efluxy_file       = 'xx_efluxy'
+        xx_efluxp_file       = 'xx_efluxp'
+        xx_bottomdrag_file   = 'xx_bottomdrag'
+        xx_nlbottomdrag_file = 'xx_nlbottomdrag'
+        xx_edtaux_file       = 'xx_edtaux'
+        xx_edtauy_file       = 'xx_edtauy'
+        xx_uvel_file         = 'xx_uvel'
+        xx_vvel_file         = 'xx_vvel'
+        xx_etan_file         = 'xx_etan'
+        xx_siarea_file       = 'xx_siarea'
+        xx_siheff_file       = 'xx_siheff'
+        xx_sihsnow_file      = 'xx_sihsnow'
 cHFLUXM_CONTROL
-        xx_hfluxm_file      = 'xx_hfluxm'
+        xx_hfluxm_file       = 'xx_hfluxm'
 cHFLUXM_CONTROL
 
 #ifdef ALLOW_TANGENTLINEAR_RUN

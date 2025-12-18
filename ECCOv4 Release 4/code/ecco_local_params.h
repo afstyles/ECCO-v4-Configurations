@@ -117,6 +117,7 @@ c     ==================================================================
      &                    mult_ini_fin,
      &                    mult_edtau,
      &                    mult_bottomdrag,
+     &                    mult_nlbottomdrag,
      &                    mult_smooth_ic,
      &                    mult_smooth_bc,
      &                    mult_transp
@@ -181,6 +182,7 @@ c     ==================================================================
       _RL  mult_ini_fin
       _RL  mult_edtau
       _RL  mult_bottomdrag
+      _RL  mult_nlbottomdrag
       _RL  mult_smooth_ic
       _RL  mult_smooth_bc
       _RL  mult_transp
@@ -243,6 +245,7 @@ c     ==================================================================
      &                kapredi_errfile,
      &                diffkr_errfile,
      &                bottomdrag_errfile,
+     &                nlbottomdrag_errfile,
      &                usercost_errfile,
      &                uwind_errfile,
      &                vwind_errfile
@@ -302,6 +305,7 @@ c     ==================================================================
       character*(MAX_LEN_FNAM) kapredi_errfile
       character*(MAX_LEN_FNAM) diffkr_errfile
       character*(MAX_LEN_FNAM) bottomdrag_errfile
+      character*(MAX_LEN_FNAM) nlbottomdrag_errfile
       character*(MAX_LEN_FNAM) usercost_errfile(NUSERCOST)
       character*(MAX_LEN_FNAM) uwind_errfile
       character*(MAX_LEN_FNAM) vwind_errfile
@@ -311,7 +315,8 @@ c     ==================================================================
      &        watemp0, waqh0, wprecip0, wsnowprecip0, wwind0,
      &        wswflux0, wswdown0, wlwflux0, wlwdown0,
      &        wevap0, wapressure0, wrunoff0, wkapredi0,
-     &        wbottomdrag0,wdiffkr0, wkapgm0, wedtau0
+     &        wbottomdrag0,wnlbottomdrag0,
+     &        wdiffkr0, wkapgm0, wedtau0
       _RL whflux0
       _RL wsflux0
       _RL wtau0
@@ -327,6 +332,7 @@ c     ==================================================================
       _RL wapressure0
       _RL wrunoff0
       _RL wbottomdrag0
+      _RL wnlbottomdrag0
       _RL wwind0
       _RL wdiffkr0
       _RL wkapgm0

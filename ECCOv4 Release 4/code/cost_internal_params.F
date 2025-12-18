@@ -119,6 +119,21 @@ c--   Bottom Drag penalty term
 #endif
       _BARRIER
 
+c--   Nonlinear Bottom Drag penalty term
+#ifdef ALLOW_NLBOTTOMDRAG_COST_CONTRIBUTION
+      call timer_start('cost_nlbottomdrag      [ECCO SPIN-DOWN]', mythid)
+      call ctrl_cost_gen2d ( 1, 1, xx_nlbottomdrag_file,
+     &     xx_nlbottomdrag_dummy, zeroRL, wnlbottomdrag,
+     &     dodimensionalcost2D, num_nlbottomdrag, objf_nlbottomdrag,
+#ifdef ECCO_CTRL_DEPRECATED
+     &     zeroRL, num_zero_mean, objf_zero_mean,
+     &     objf_zero_smoo, zeroRL, zeroRL,
+#endif /* ECCO_CTRL_DEPRECATED */
+     &     maskC, myThid )
+      call timer_stop ('cost_nlbottomdrag      [ECCO SPIN-DOWN]', mythid)
+#endif
+      _BARRIER
+
 #endif
 
       end

@@ -166,6 +166,7 @@ cph(
               wtauv2  (i,j,bi,bj) = 0. _d 0
 cph)
               wbottomdrag (i,j,bi,bj) = wbottomdrag0
+              wnlbottomdrag (i,j,bi,bj) = wnlbottomdrag0
             enddo
           enddo
         enddo
@@ -1525,6 +1526,28 @@ c--           Test for missing values.
       endif
 #endif
 
+#if (defined (ALLOW_NLBOTTOMDRAG_COST_CONTRIBUTION) || defined (ALLOW_NLBOTTOMDRAG_CONTROL))
+      if ( nlbottomdrag_errfile .NE. ' ' ) then
+
+        call mdsreadfield( nlbottomdrag_errfile, cost_iprec, cost_yftype,
+     &      nnz, wnlbottomdrag, irec, mythid )
+
+      do bj = jtlo,jthi
+        do bi = itlo,ithi
+          do j = jmin,jmax
+            do i = imin,imax
+c--           Test for missing values.
+              if (wnlbottomdrag(i,j,bi,bj) .lt. -9900.) then
+                wnlbottomdrag(i,j,bi,bj) = 0. _d 0
+              endif
+            enddo
+          enddo
+        enddo
+      enddo
+
+      endif
+#endif
+
 #if (defined (ALLOW_DIFFKR_COST_CONTRIBUTION) || defined (ALLOW_DIFFKR_CONTROL))
       if ( diffkr_errfile .NE. ' ' ) then
 
@@ -1858,6 +1881,12 @@ c--   Units have to be checked!
               else
                 wbottomdrag(i,j,bi,bj) = 0.0 _d 0
               endif
+              if (wnlbottomdrag(i,j,bi,bj) .ne. 0.) then
+                wnlbottomdrag(i,j,bi,bj) =
+     &                1./wnlbottomdrag(i,j,bi,bj)/wnlbottomdrag(i,j,bi,bj)
+              else
+                wnlbottomdrag(i,j,bi,bj) = 0.0 _d 0
+              endif
 
 c the following makes no sense inside i,j loop
 c              if (wsfluxmm(bi,bj).ne.0.)
@@ -2127,6 +2156,11 @@ c#endif
 
 #if (defined (ALLOW_BOTTOMDRAG_COST_CONTRIBUTION) || defined (ALLOW_BOTTOMDRAG_CONTROL))
       call active_write_xy_loc( 'wbottomdrag', wbottomdrag
+     & , 1, 0, mythid, dummy)
+#endif
+
+#if (defined (ALLOW_NLBOTTOMDRAG_COST_CONTRIBUTION) || defined (ALLOW_NLBOTTOMDRAG_CONTROL))
+      call active_write_xy_loc( 'wnlbottomdrag', wnlbottomdrag
      & , 1, 0, mythid, dummy)
 #endif
 

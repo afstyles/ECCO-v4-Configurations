@@ -524,6 +524,14 @@ c--
 
 c----------------------------------------------------------------------
 c--
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL_NONGENERIC
+        call ctrl_init_ctrlvar (
+     &       xx_nlbottomdrag_file, 53, 153, 1, 1, 1,
+     &       snx, sny, 1, 'c', 'xy', myThid )
+#endif /* ALLOW_NLBOTTOMDRAG_CONTROL */
+
+c----------------------------------------------------------------------
+c--
 #ifdef ALLOW_HFLUXM_CONTROL
         call ctrl_init_ctrlvar (
      &       xx_hfluxm_file, 24, 124, 1, 1, 1,
@@ -815,6 +823,7 @@ c--
      &       snx, sny, 1, 'c', 'xy', myThid )
 # endif
 #endif /* ALLOW_ATM_MEAN_CONTROL */
+
 
 #endif /* ECCO_CTRL_DEPRECATED */
 

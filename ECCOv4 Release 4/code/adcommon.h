@@ -117,6 +117,11 @@ C--   heimbach@mit.edu 11-Jan-2001
      &                adbottomdragfld
       _RL  adbottomdragfld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
 #endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      COMMON /ADCTRL_FIELDS_NLBOTTOMDRAG/
+     &                adnlbottomdragfld
+      _RL  adnlbottomdragfld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+#endif
 #ifdef ALLOW_EDDYPSI_CONTROL
       _RS adEddyPsiX(1-OLx:sNx+OLx,1-OLy:sNy+OLy,Nr,nSx,nSy)
       _RS adEddyPsiY(1-OLx:sNx+OLx,1-OLy:sNy+OLy,Nr,nSx,nSy)

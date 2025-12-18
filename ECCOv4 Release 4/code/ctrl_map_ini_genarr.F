@@ -51,7 +51,7 @@ C     == local variables ==
       integer iarr
 #endif
 #ifdef ALLOW_GENARR2D_CONTROL
-      integer igen_etan,igen_bdrag,igen_geoth
+      integer igen_etan,igen_bdrag,igen_nlbdrag,igen_geoth
 #endif /* ALLOW_GENARR2D_CONTROL */
 #ifdef ALLOW_GENARR3D_CONTROL
       integer igen_theta0, igen_salt0
@@ -68,6 +68,7 @@ C--   generic 2D control variables
 
       igen_etan=0
       igen_bdrag=0
+      igen_nlbdrag=0
       igen_geoth=0
       DO iarr = 1, maxCtrlArr2D
       if (xx_genarr2d_weight(iarr).NE.' ') then
@@ -75,6 +76,8 @@ C--   generic 2D control variables
      &     igen_etan=iarr
         if (xx_genarr2d_file(iarr)(1:13).EQ.'xx_bottomdrag') 
      &     igen_bdrag=iarr
+        if (xx_genarr2d_file(iarr)(1:15).EQ.'xx_nlbottomdrag') 
+     &     igen_nlbdrag=iarr
         if (xx_genarr2d_file(iarr)(1:13).EQ.'xx_geothermal') 
      &     igen_geoth=iarr
       endif
@@ -87,6 +90,10 @@ C           call ctrl_map_genarr2d(etaH,igen_etan,myThid)
 #ifdef ALLOW_BOTTOMDRAG_CONTROL
       if (igen_bdrag.GT.0)
      &  call ctrl_map_genarr2d(bottomDragFld,igen_bdrag,myThid)
+#endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      if (igen_nlbdrag.GT.0)
+     &  call ctrl_map_genarr2d(nlbottomDragFld,igen_nlbdrag,myThid)
 #endif
 #ifdef ALLOW_GEOTHERMAL_FLUX
       if (igen_geoth.GT.0)

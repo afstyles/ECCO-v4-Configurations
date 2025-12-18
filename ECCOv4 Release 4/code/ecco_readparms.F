@@ -124,6 +124,7 @@ c--   Read the namelist input.
      &                   uwind_errfile, vwind_errfile,
      &                   geoid_errfile, geoid_covariancefile,
      &                   bottomdrag_errfile,edtau_errfile,
+     &                   nlbottomdrag_errfile,
      &                   kapgm_errfile,kapredi_errfile,diffkr_errfile,
      &                   usercost_datafile, usercost_errfile,
      &                   mult_hflux, mult_sflux, mult_tauu, mult_tauv,
@@ -152,11 +153,12 @@ c--   Read the namelist input.
 #endif
      &                   mult_curmtr,
      &                   mult_kapgm, mult_kapredi, mult_diffkr,
-     &                   mult_edtau, mult_bottomdrag,
+     &                   mult_edtau, 
+     &                   mult_bottomdrag,mult_nlbottomdrag,
      &                   mult_usercost, mult_transp,
      &                   mult_smooth_ic, mult_smooth_bc,
      &                   whflux0, wsflux0, wtau0,
-     &                   wbottomdrag0,
+     &                   wbottomdrag0,wnlbottomdrag0,
      &                   watemp0, waqh0,
      &                   wprecip0, wswflux0, wswdown0, wwind0,
      &                   wsnowprecip0, wlwflux0, wlwdown0, wevap0,
@@ -381,6 +383,7 @@ catn  eccov4 will run without needing to read in these params
         geoid_errfile         =    ' '
         geoid_covariancefile  =    ' '
         bottomdrag_errfile    =    ' '
+        nlbottomdrag_errfile  =    ' '
         edtau_errfile         =    ' '
         kapgm_errfile         =    ' '
         kapredi_errfile       =    ' '
@@ -460,6 +463,7 @@ catn  eccov4 will run without needing to read in these params
         mult_diffkr           =      0. _d 0
         mult_edtau            =      0. _d 0
         mult_bottomdrag       =      0. _d 0
+        mult_nlbottomdrag     =      0. _d 0
         do k=1,NUSERCOST
         mult_usercost(k)       =      0. _d 0
         enddo
@@ -488,6 +492,7 @@ catn  eccov4 will run without needing to read in these params
         wsflux0               =      0. _d 0
         wtau0                 =      0. _d 0
         wbottomdrag0          =      1. _d 0
+        wnlbottomdrag0          =      1. _d 0
         wmean_atemp           =      0. _d 0
         wmean_aqh             =      0. _d 0
         wmean_precip          =      0. _d 0

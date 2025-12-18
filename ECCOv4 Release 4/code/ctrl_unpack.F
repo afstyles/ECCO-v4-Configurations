@@ -172,6 +172,7 @@ c--   Assign file names.
       call ctrl_set_fname(xx_efluxy_file, fname_efluxy, mythid)
       call ctrl_set_fname(xx_efluxp_file, fname_efluxp, mythid)
       call ctrl_set_fname(xx_bottomdrag_file, fname_bottomdrag, mythid)
+      call ctrl_set_fname(xx_nlbottomdrag_file, fname_nlbottomdrag, mythid)
       call ctrl_set_fname(xx_edtaux_file, fname_edtaux, mythid)
       call ctrl_set_fname(xx_edtauy_file, fname_edtauy, mythid)
       call ctrl_set_fname(xx_uvel_file, fname_uvel, mythid)
@@ -828,6 +829,16 @@ c----------------------------------------------------------------------
      &         lxxadxx, cunit, ivartype, forcingPrecond,
      &         fname_shifwflx(ictrlgrad), "maskCtrlI",
      &         weighttype, nwetiglobal, mythid)
+#endif
+
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+          ivartype    = 46
+          write(weighttype(1:80),'(80a)') ' '
+          write(weighttype(1:80),'(a)') "wnlbottomdrag"
+          call ctrl_set_unpack_xy(
+     &         lxxadxx, cunit, ivartype, forcingPrecond,
+     &         fname_nlbottomdrag(ictrlgrad), "maskCtrlC",
+     &         weighttype, nwetcglobal, mythid)
 #endif
 
 #endif /* ECCO_CTRL_DEPRECATED */

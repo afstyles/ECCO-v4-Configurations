@@ -40,6 +40,7 @@ c     ==================================================================
      &                  , xx_efluxy_dummy
      &                  , xx_efluxp_dummy
      &                  , xx_bottomdrag_dummy
+     &                  , xx_nlbottomdrag_dummy    
      &                  , xx_edtaux_dummy
      &                  , xx_edtauy_dummy
      &                  , xx_uvel_dummy
@@ -121,6 +122,7 @@ cHFLUXM_CONTROL
       _RL xx_efluxy_dummy
       _RL xx_efluxp_dummy
       _RL xx_bottomdrag_dummy
+      _RL xx_nlbottomdrag_dummy
       _RL xx_edtaux_dummy
       _RL xx_edtauy_dummy
       _RL xx_uvel_dummy

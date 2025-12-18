@@ -107,7 +107,7 @@ c the adjoint, pkg/autodiff most likely require cost though.
       _RL f_ageos, f_curmtr
       _RL f_ini_fin
       _RL f_kapgm, f_kapredi, f_diffkr
-      _RL f_eddytau, f_bottomdrag
+      _RL f_eddytau, f_bottomdrag, f_nlbottomdrag
       _RL f_transp, f_ies
 #endif /* ECCO_CTRL_DEPRECATED */
 
@@ -147,7 +147,7 @@ c the adjoint, pkg/autodiff most likely require cost though.
       _RL no_ageos, no_curmtr
       _RL no_ini_fin
       _RL no_kapgm, no_kapredi, no_diffkr
-      _RL no_eddytau, no_bottomdrag
+      _RL no_eddytau, no_bottomdrag, no_nlbottomdrag
       _RL no_hmean
       _RL no_transp, no_ies
 #endif /* ECCO_CTRL_DEPRECATED */
@@ -270,6 +270,7 @@ c     == end of interface ==
       f_diffkr  = 0. _d 0
       f_eddytau = 0. _d 0
       f_bottomdrag = 0. _d 0
+      f_nlbottomdrag = 0. _d 0
       f_transp  = 0. _d 0
       f_ies = 0. _d 0
 #endif /* ECCO_CTRL_DEPRECATED */
@@ -381,6 +382,7 @@ c     == end of interface ==
       no_diffkr  = 0. _d 0
       no_eddytau = 0. _d 0
       no_bottomdrag = 0. _d 0
+      no_nlbottomdrag = 0. _d 0
       no_transp  = 0. _d 0
       no_ies = 0. _d 0
 #endif /* ECCO_CTRL_DEPRECATED */
@@ -491,6 +493,7 @@ c--   Sum up all contributions.
      &                          objf_salt_ini_fin(bi,bj))
      &         + mult_edtau * objf_eddytau(bi,bj)
      &         + mult_bottomdrag * objf_bottomdrag(bi,bj)
+     &         + mult_nlbottomdrag * objf_nlbottomdrag(bi,bj)
 
 #endif /* ECCO_CTRL_DEPRECATED */
 
@@ -629,6 +632,7 @@ c--   Sum up all contributions.
      &         objf_theta_ini_fin(bi,bj) + objf_salt_ini_fin(bi,bj)
           f_eddytau = f_eddytau + objf_eddytau(bi,bj)
           f_bottomdrag = f_bottomdrag + objf_bottomdrag(bi,bj)
+          f_nlbottomdrag = f_nlbottomdrag + objf_nlbottomdrag(bi,bj)
 #endif /* ECCO_CTRL_DEPRECATED */
 
 #if (defined (ALLOW_CTRL) && defined (ALLOW_OBCS))
@@ -744,6 +748,7 @@ c--   Sum up all contributions.
      &         num_theta_ini_fin(bi,bj) + num_salt_ini_fin(bi,bj)
           no_eddytau = no_eddytau + num_eddytau(bi,bj)
           no_bottomdrag = no_bottomdrag + num_bottomdrag(bi,bj)
+          no_nlbottomdrag = no_nlbottomdrag + num_nlbottomdrag(bi,bj)
 
 #endif /* ECCO_CTRL_DEPRECATED */
 
@@ -886,6 +891,7 @@ c--   Do global summation for each part of the cost function
       _GLOBAL_SUM_RL( f_ini_fin , myThid )
       _GLOBAL_SUM_RL( f_eddytau , myThid )
       _GLOBAL_SUM_RL( f_bottomdrag , myThid )
+      _GLOBAL_SUM_RL( f_nlbottomdrag , myThid )
 #endif /* ECCO_CTRL_DEPRECATED */
 
 #if (defined (ALLOW_CTRL) && defined (ALLOW_OBCS))
@@ -992,6 +998,7 @@ c--   Do global summation for each part of the cost function
       _GLOBAL_SUM_RL( no_ini_fin , myThid )
       _GLOBAL_SUM_RL( no_eddytau , myThid )
       _GLOBAL_SUM_RL( no_bottomdrag , myThid )
+      _GLOBAL_SUM_RL( no_nlbottomdrag , myThid )
 #endif /* ECCO_CTRL_DEPRECATED */
 
 #if (defined (ALLOW_CTRL) && defined (ALLOW_OBCS))
@@ -1190,6 +1197,8 @@ c--   Do global summation for each part of the cost function
      &     ' --> f_eddytau =', f_eddytau
       write(standardmessageunit,'(A,D22.15)')
      &     ' --> f_bottomdrag =', f_bottomdrag
+      write(standardmessageunit,'(A,D22.15)')
+     &     ' --> f_nlbottomdrag =', f_nlbottomdrag
 #endif /* ECCO_CTRL_DEPRECATED */
 
 #if (defined (ALLOW_CTRL) && defined (ALLOW_OBCS))
@@ -1505,6 +1514,8 @@ C     only master thread of master CPU open and write to file
      &       'f_eddytau =', f_eddytau, no_eddytau
         write(ifc,'(A,2D22.15)')
      &       'f_bottomdrag =', f_bottomdrag, no_bottomdrag
+        write(ifc,'(A,2D22.15)')
+     &       'f_nlbottomdrag =', f_nlbottomdrag, no_nlbottomdrag
         write(ifc,'(A,2D22.15)')
      &       'f_transp =', f_transp, no_transp
 #endif /* ECCO_CTRL_DEPRECATED */

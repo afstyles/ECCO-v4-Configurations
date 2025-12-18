@@ -630,6 +630,18 @@ c--   == end of interface ==
          end if
 #endif /* ALLOW_ETAN0_CONTROL */
 
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      else if ( grdchkvarindex .eq. 46 ) then
+         il=ilnblnk( xx_nlbottomdrag_file )
+         if ( theSimulationMode .EQ. TANGENT_SIMULATION ) then
+            write(fname(1:80),'(3a,i10.10)')
+     &           yadmark, xx_nlbottomdrag_file(1:il),'.',optimcycle
+         else if ( theSimulationMode .EQ. FORWARD_SIMULATION ) then
+            write(fname(1:80),'(2a,i10.10)')
+     &           xx_nlbottomdrag_file(1:il),'.',optimcycle
+         end if
+#endif /* ALLOW_NLBOTTOMDRAG_CONTROL */
+
 #endif /* ECCO_CTRL_DEPRECATED */
 
 #ifdef ALLOW_GENARR2D_CONTROL

@@ -395,6 +395,26 @@ c--   bottom drag
       enddo
 #endif
 
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL_NONGENERIC
+c--   bottom drag
+      il=ilnblnk( xx_nlbottomdrag_file )
+      write(fnamegeneric(1:80),'(2a,i10.10)')
+     &     xx_nlbottomdrag_file(1:il),'.',optimcycle
+      call active_read_xy ( fnamegeneric, tmpfld2d, 1,
+     &                      doglobalread, ladinit, optimcycle,
+     &                      mythid, xx_nlbottomdrag_dummy )
+      do bj = jtlo,jthi
+        do bi = itlo,ithi
+          do j = jmin,jmax
+            do i = imin,imax
+              nlbottomDragFld(i,j,bi,bj) = nlbottomDragFld(i,j,bi,bj)
+     &                                   + tmpfld2d(i,j,bi,bj)
+            enddo
+          enddo
+        enddo
+      enddo
+#endif
+
 #ifdef ALLOW_EDDYPSI_CONTROL
 c-- zonal eddy streamfunction : eddyPsiX
       il=ilnblnk( xx_edtaux_file )
@@ -593,6 +613,9 @@ c--   Update the tile edges.
 #endif
 #ifdef ALLOW_BOTTOMDRAG_CONTROL
       _EXCH_XY_RL( bottomDragFld, mythid )
+#endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      _EXCH_XY_RL( nlbottomDragFld, mythid )
 #endif
 
 #ifdef ALLOW_EDDYPSI_CONTROL

@@ -232,6 +232,19 @@ c--   SSS relaxation coefficient.
       _EXCH_XY_RL( bottomDragFld, mythid)
 #endif
 
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      boundsVec(1)=0.
+      boundsVec(2)=1. _d -4
+      boundsVec(3)=0.9 _d -2
+      boundsVec(4)=1. _d -2
+      boundsVec(5)=0.
+      paramSmooth=1
+      call ctrl_map_ini_gen2D(xx_nlbottomdrag_file, 'wnlbottomdrag',
+     & xx_nlbottomdrag_dummy, boundsVec, nlbottomDragFld, maskc,
+     & paramSmooth, mythid )
+      _EXCH_XY_RL( nlbottomDragFld, mythid)
+#endif
+
 #ifdef ALLOW_EDDYPSI_CONTROL
       boundsVec(1)=-0.4
       boundsVec(2)=-0.3

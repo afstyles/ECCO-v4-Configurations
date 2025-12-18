@@ -152,6 +152,7 @@ c--   Initialize the tiled cost function contributions.
           objf_salt_ini_fin(bi,bj)  = 0. _d 0
           objf_eddytau(bi,bj)    = 0. _d 0
           objf_bottomdrag(bi,bj)    = 0. _d 0
+          objf_nlbottomdrag(bi,bj)    = 0. _d 0
           do k=1,NUSERCOST
             objf_usercost(k,bi,bj)   = 0. _d 0
           enddo
@@ -213,6 +214,7 @@ c--   Initialize the tiled cost function contributions.
           num_kapredi(bi,bj)    = 0. _d 0
           num_eddytau(bi,bj)    = 0. _d 0
           num_bottomdrag(bi,bj)    = 0. _d 0
+          num_nlbottomdrag(bi,bj)    = 0. _d 0
           do k=1,NUSERCOST
           num_usercost(k,bi,bj)    = 0. _d 0
           enddo

@@ -51,6 +51,7 @@ c     xx_tauv_file  - control vector meridional wind stress file.
      &                    , xx_efluxy_file
      &                    , xx_efluxp_file
      &                    , xx_bottomdrag_file
+     &                    , xx_nlbottomdrag_file
      &                    , xx_edtaux_file
      &                    , xx_edtauy_file
      &                    , xx_uvel_file
@@ -105,6 +106,7 @@ cHFLUXM_CONTROL
       character*(MAX_LEN_FNAM) xx_efluxy_file
       character*(MAX_LEN_FNAM) xx_efluxp_file
       character*(MAX_LEN_FNAM) xx_bottomdrag_file
+      character*(MAX_LEN_FNAM) xx_nlbottomdrag_file
       character*(MAX_LEN_FNAM) xx_edtaux_file
       character*(MAX_LEN_FNAM) xx_edtauy_file
       character*(MAX_LEN_FNAM) xx_uvel_file

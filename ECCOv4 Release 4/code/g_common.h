@@ -134,6 +134,11 @@ cph larger common block, so be careful
      &                       g_bottomdragfld
       _RL  g_bottomdragfld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
 #endif
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      COMMON /G_CTRL_FIELDS_NLBOTTOMDRAG/
+     &                       g_nlbottomdragfld
+      _RL  g_nlbottomdragfld (1-OLx:sNx+OLx,1-OLy:sNy+OLy,nSx,nSy)
+#endif
 
 #ifdef ALLOW_EXF
       _RL g_hflux(1-olx:snx+olx,1-oly:sny+oly,nsx,nsy)

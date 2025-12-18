@@ -342,6 +342,18 @@ c     == end of interface ==
       enddo
 #endif
 
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+      do bj = jtlo,jthi
+        do bi = itlo,ithi
+          do j = jmin,jmax
+            do i = imin,imax
+              nlbottomDragFld(i,j,bi,bj) = 0. _d 0
+            enddo
+          enddo
+        enddo
+      enddo
+#endif
+
 #ifdef ALLOW_ATM_MEAN_CONTROL
       do bj = jtlo,jthi
         do bi = itlo,ithi
