@@ -192,7 +192,7 @@ C-    same as above but using wet-point method to average 4 V
           uDragTerms(i,j) = uDragTerms(i,j)
      &     - recDrF_bot(i,j)*(
      &      bottomDragQuadratic
- #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
+#ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i-1,j,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
 #endif    
