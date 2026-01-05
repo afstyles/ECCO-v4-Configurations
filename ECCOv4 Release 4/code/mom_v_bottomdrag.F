@@ -196,7 +196,7 @@ C-    same as above but using wet-point method to average 4 U
      &     + halfRL*( nlbottomDragFld(i,j-1,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
 #endif      
-     &.    )*SQRT(vSq)*dragFac
+     &     )*SQRT(vSq)*dragFac
      &      *vFld(i,j)
          ENDIF
         ENDDO
