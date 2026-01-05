@@ -461,9 +461,11 @@ C       case dumpAdVarExch = 2
 #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
           CALL COPY_ADVAR_OUTP( dumRS, adnlBottomDragFld,
      &                                        var2Du, 1, 12, myThid )
-          IF (.NOT.dumpAdByRec) CALL WRITE_FLD_XY_RL( 'ADJnlbottomdrag.',
+          IF (.NOT.dumpAdByRec) CALL WRITE_FLD_XY_RL( 
+     &                           'ADJnlbottomdrag.',
      &                           suff, var2Du, myIter, myThid )
-          IF (  dumpAdByRec   ) CALL WRITE_REC_XY_RL( 'ADJnlbottomdrag',
+          IF (  dumpAdByRec   ) CALL WRITE_REC_XY_RL( 
+     &                           'ADJnlbottomdrag',
      &                           var2Du, dumpAdRecMn, myIter, myThid )
 #endif
 C       end if dumpAdVarExch = 2
