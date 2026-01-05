@@ -161,8 +161,8 @@ C-    calculate locally velocity norm @ U.pt (local U & 4 V averaged)
      &         )*recip_hFacW(i,j,k,bi,bj)*0.25 _d 0
          IF ( uSq.GT.zeroRL ) THEN
           uDragTerms(i,j) = uDragTerms(i,j)
-     &     - recDrF_bot(i,j)
-     &      *(bottomDragQuadratic
+     &     - recDrF_bot(i,j)*(
+     &      bottomDragQuadratic
 #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i-1,j,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
@@ -190,8 +190,8 @@ C-    same as above but using wet-point method to average 4 V
          ENDIF
          IF ( uSq.GT.zeroRL ) THEN
           uDragTerms(i,j) = uDragTerms(i,j)
-     &     - recDrF_bot(i,j)
-     &      *(bottomDragQuadratic
+     &     - recDrF_bot(i,j)*(
+     &      bottomDragQuadratic
  #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i-1,j,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )

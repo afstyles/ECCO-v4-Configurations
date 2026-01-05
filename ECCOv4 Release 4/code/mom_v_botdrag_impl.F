@@ -152,8 +152,8 @@ C-    average grid-cell-center KE to get velocity norm @ V.pt
          DO i=1-OLx,sNx+OLx-1
           IF ( (KE(i,j)+KE(i,j-1)) .GT. 0. ) THEN
            cDrag(i,j,k) = cDrag(i,j,k)
-     &      + recDrF_bot(i,j)
-     &       *(bottomDragQuadratic
+     &      + recDrF_bot(i,j)*(
+     &       bottomDragQuadratic
 #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i,j-1,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
@@ -175,8 +175,8 @@ C-    calculate locally velocity norm @ V.pt (local V & 4 U averaged)
      &       )*recip_hFacS(i,j,k,bi,bj)*0.25 _d 0
           IF ( vSq.GT.zeroRL ) THEN
            cDrag(i,j,k) = cDrag(i,j,k)
-     &      + recDrF_bot(i,j)
-     &       *(bottomDragQuadratic
+     &      + recDrF_bot(i,j)*(
+     &       bottomDragQuadratic
 #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i,j-1,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
@@ -204,8 +204,8 @@ C-    same as above but using wet-point method to average 4 U
           ENDIF
           IF ( vSq.GT.zeroRL ) THEN
            cDrag(i,j,k) = cDrag(i,j,k)
-     &      + recDrF_bot(i,j)
-     &       *(bottomDragQuadratic
+     &      + recDrF_bot(i,j)*(
+     &       bottomDragQuadratic
 #ifdef ALLOW_NLBOTTOMDRAG_CONTROL
      &     + halfRL*( nlbottomDragFld(i,j-1,bi,bj)
      &              + nlbottomDragFld(i,j,bi,bj) )
