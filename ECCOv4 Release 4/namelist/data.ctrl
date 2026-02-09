@@ -73,8 +73,13 @@
 #
  xx_genarr2d_weight(2) = 'weights_ones.data',
  xx_genarr2d_file(2)='xx_bottomdrag',
- xx_genarr3d_preproc_i(1,2)=1,
+ xx_genarr2d_preproc_i(1,2)=1,
  mult_genarr2d(2) =0.,
+#
+ xx_genarr2d_weight(3) = 'weights_ones.data',
+ xx_genarr2d_file(3)='xx_nlbottomdrag',
+ xx_genarr2d_preproc_i(1,3)=1,
+ mult_genarr2d(3) =0.,
 #
  xx_genarr3d_weight(1) = 'Theta_weights_nonseasonal_rmsv2_areascaled.bin',
  xx_genarr3d_file(1)='xx_theta',
