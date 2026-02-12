@@ -1,3 +1,8 @@
+Edits made by E Boland:
+- code contains some cherry-picked updates to reduce TAF recomputations etc
+- code_noparam additionally contains code modifications to avoid TAF differentiation of the bulk formulae as described in https://yavorkostovocean.wordpress.com/code/. 
+  This is used in Boland et. al (2025), doi to follow.
+- namelist_adjsen contains namelists that match experiments from Boland et. al (2025), doi to follow
 
 -------------------------------------------------------------------------------------------------------------
 ECCO Version 4: Fourth Release       [ECCO v4-r4] [https://ecco.jpl.nasa.gov/drive/files/Version4/Release4/]

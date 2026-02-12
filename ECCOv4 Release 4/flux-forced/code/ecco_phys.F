@@ -3,7 +3,7 @@ C $Name:  $
 
 #include "ECCO_OPTIONS.h"
 
-      subroutine ecco_phys( mythid )
+      SUBROUTINE ECCO_PHYS( myTime, myIter, myThid )
 
 c     ==================================================================
 c     SUBROUTINE ecco_phys
@@ -35,16 +35,17 @@ c     == global variables ==
 
 c     == routine arguments ==
 
-      integer mythid
+      _RL     myTime
+      INTEGER myIter, myThid
 
 c     == local variables ==
 
-      integer bi,bj
-      integer i,j,k
-      integer jmin,jmax
-      integer imin,imax
+      INTEGER bi,bj
+      INTEGER i,j,k
+      INTEGER jmin,jmax
+      INTEGER imin,imax
 #ifdef ALLOW_GENCOST_CONTRIBUTION
-      integer kgen, kgen3d, itr, kp1, maskp1
+      INTEGER kgen, kgen3d, itr, kp1, maskp1
       _RL areavolTile(nSx,nSy), areavolGlob
       _RL tmpfld, tmpvol, tmpmsk, tmpmsk2, tmpmskW, tmpmskS
       _RL tmp_sigmsk, tmpsig, tmpsig_lower, tmpsig_upper
@@ -90,7 +91,7 @@ c need to include halos for find_rho_2d
      O                RHOInSituLoc(1-OLx,1-OLy,k,bi,bj),
      I                k, bi, bj, myThid )
           enddo
-        enddo
+       enddo
       enddo
 
       DO bj=myByLo(myThid),myByHi(myThid)
@@ -218,6 +219,24 @@ C     i.e. sterGloH computed in ecco_phys.F (units converted from m to m2/s2)
             enddo
         enddo
       enddo
+
+#ifdef ALLOW_DIAGNOSTICS
+      IF ( useDiagnostics .AND. myIter.GE.0 ) THEN
+        CALL DIAGNOSTICS_FILL( m_eta, 'SSHNOIBC', 0,1, 0,1,1, myThid )
+        CALL DIAGNOSTICS_SCALE_FILL( m_bp, recip_gravity, 1,
+     &                         'OBPGMAP ', 0,1, 0,1,1, myThid )
+#ifdef ATMOSPHERIC_LOADING
+#ifdef ALLOW_IB_CORR
+        CALL DIAGNOSTICS_FILL( m_eta_ib,
+     &                         'SSHIBC  ', 0,1, 0,1,1, myThid )
+        CALL DIAGNOSTICS_FILL( m_eta_dyn,
+     &                         'SSH     ', 0,1, 0,1,1, myThid )
+        CALL DIAGNOSTICS_SCALE_FILL( m_bp_nopabar, recip_gravity, 1,
+     &                         'OBP     ', 0,1, 0,1,1, myThid )
+#endif /* ALLOW_IB_CORR */
+#endif /* ATMOSPHERIC_LOADING */
+      ENDIF
+#endif /* ALLOW_DIAGNOSTICS */
 
       DO bj=myByLo(myThid),myByHi(myThid)
        DO bi=myBxLo(myThid),myBxHi(myThid)
@@ -382,7 +401,7 @@ c
 c
             gencost_storefld(i,j,bi,bj,kgen) =
      &          gencost_storefld(i,j,bi,bj,kgen)
-     &          +tmpmsk*tmpfld*tmpvol
+     &          +tmpmsk*tmpfld
             areavolTile(bi,bj)=areavolTile(bi,bj)
      &          +tmpmsk2*eccoVol_0(i,j,k,bi,bj)
 c
@@ -395,7 +414,7 @@ c---------
      &        gencost_barfile(kgen)(1:13).EQ.'m_boxmean_obp') then
            if (gencost_barfile(kgen)(1:17).EQ.'m_boxmean_eta_dyn') then
             tmpfld=m_eta_dyn(i,j,bi,bj)
-           else if (gencost_barfile(kgen)(1:13).EQ.'m_boxmean_eta_dyn')
+           else if (gencost_barfile(kgen)(1:13).EQ.'m_boxmean_eta')
      &      then
             tmpfld=m_eta(i,j,bi,bj)
            else if (gencost_barfile(kgen)(1:17).EQ.'m_boxmean_obpgmap')

@@ -62,7 +62,7 @@
  useJamartWetPoints=.TRUE.,
  readBinaryPrec=32,
  writeBinaryPrec=32,
- debugLevel=1,
+ debugLevel=4,
  /
 
 # Elliptic solver parameters
@@ -75,11 +75,9 @@
  &PARM03
  nIter0=1,
 #2 lev2 for testing:
-#nTimeSteps=8,
+ nTimeSteps=43830,
 #3month
 #nTimeSteps=2160,
-#1 year
- nTimeSteps=8759,
 #18month
 #nTimeSteps=13110,
 #2yr
@@ -120,7 +118,7 @@
 # monitorFreq = 7200.0,
  monitorFreq = 6307200.0,
  dumpInitAndLast = .TRUE.,
- adjDumpFreq = 31536000.0,
+ adjDumpFreq = 604800.0,
 #adjDumpFreq = 604800.0,
  adjMonitorFreq = 864000.0,
  pickupStrictlyMatch=.FALSE.,

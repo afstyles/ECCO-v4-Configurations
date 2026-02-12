@@ -49,28 +49,15 @@ C     msgBuf      - Informational/error meesage buffer
       CHARACTER*(128) tempfile,tempfile1
       INTEGER icount_transp
       _RS     dummyRS(1)
+      integer k
 #endif
 
-      INTEGER bi, bj, i, j, k
       integer nRetired
 
 c     == external functions ==
 
       integer  ilnblnk
       external ilnblnk
-
-      DO bj=myByLo(myThid),myByHi(myThid)
-       DO bi=myBxLo(myThid),myBxHi(myThid)
-          do k = 1,nr
-            do j = 1-OLy,sNy+Oly
-              do i = 1-OLx,sNx+OLx
-                eccoVol_0(i,j,k,bi,bj)=
-     &          hFacC(i,j,k,bi,bj)*drF(k)*rA(i,j,bi,bj)
-              enddo
-            enddo
-          enddo
-        enddo
-      enddo
 
       _BEGIN_MASTER(myThid)
 

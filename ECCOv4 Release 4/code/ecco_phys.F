@@ -2,6 +2,9 @@ C $Header: /u/gcmpack/MITgcm/pkg/ecco/ecco_phys.F,v 1.18 2017/04/03 23:16:38 ou.
 C $Name:  $
 
 #include "ECCO_OPTIONS.h"
+#ifdef ALLOW_AUTODIFF
+# include "AUTODIFF_OPTIONS.h"
+#endif
 
       subroutine ecco_phys( mythid )
 
@@ -31,6 +34,9 @@ c     == global variables ==
 #ifdef ALLOW_PTRACERS
 # include "PTRACERS_SIZE.h"
 # include "PTRACERS_FIELDS.h"
+#endif
+#ifdef ALLOW_AUTODIFF_TAMC
+# include "tamc.h"
 #endif
 
 c     == routine arguments ==
@@ -70,6 +76,11 @@ c- note defined with overlap here, not needed, but more efficient
 #ifdef ALLOW_PSBAR_STERIC
       _RL RHOInSituLoc(1-OLx:sNx+OLx,1-OLy:sNy+OLy,Nr,nSx,nSy)
       _RL VOLsumTile(nSx,nSy),RHOsumTile(nSx,nSy)
+#endif
+
+#if ( defined ALLOW_AUTODIFF_TAMC && defined ALLOW_GENCOST_CONTRIBUTION )
+C     ikey   :: tape key (depends on kgen)
+      INTEGER ikey
 #endif
 
 c need to include halos for find_rho_2d
@@ -321,7 +332,7 @@ c
      &          gencost_storefld(i,j,bi,bj,kgen)
      &          +tmpmsk*tmpfld*tmpvol
             areavolTile(bi,bj)=areavolTile(bi,bj)
-     &          +tmpmsk2*hFacC(i,j,k,bi,bj)*drF(k)*rA(i,j,bi,bj)
+     &          +tmpmsk2*tmpvol
 c
           enddo
 c---------
@@ -494,6 +505,12 @@ c---------
         areavolGlob=1
       elseif (gencost_barfile(kgen)(1:9).EQ.'m_boxmean') then
         CALL GLOBAL_SUM_TILE_RL( areavolTile, areavolGlob, myThid )
+#ifdef ALLOW_AUTODIFF_TAMC
+C     avoid recomputing areavolGlob multiple times each time this
+C     routine is called
+        ikey = kgen + (ikey_dynamics-1)*NGENCOST
+CADJ STORE areavolGlob = comlev1_ngencost, key = ikey
+#endif
         CALL ecco_div( gencost_storefld(1-OLx,1-OLy,1,1,kgen),
      &                 1, areavolGlob, myThid )
       endif
